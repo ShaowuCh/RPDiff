@@ -1,0 +1,65 @@
+model:
+  base_learning_rate: 0.0001
+  target: networks.icassp_diffusion.net.Net
+  params:
+    ms_chans: 8
+    dim: 32
+    resolution_step: 16
+lightning:
+  phase: train
+  name: rpdiff_step32_schedule_midnoise
+  resume: false
+  postfix: QB
+  trainer:
+    accelerator: gpu
+    devices:
+    - 0
+    accumulate_grad_batches: 1
+    check_val_every_n_epoch: 50
+    default_root_dir: ./logs
+    max_epochs: 2000
+  callbacks:
+    modelckpt:
+      target: pytorch_lightning.callbacks.ModelCheckpoint
+      params:
+        dirpath: ./logs/checkpoints
+        filename:
+          epoch:06: null
+        verbose: true
+        save_last: true
+        monitor: q2n
+        mode: max
+        save_top_k: 1
+        every_n_epochs: 1
+    setup_callback:
+      target: custom_callbacks.setup.SetupCallback
+      params:
+        resume: false
+    train_recoder:
+      target: custom_callbacks.train_callbacks.RecordCallback
+      params:
+        epoch_freq: 1
+    val_recoder:
+      target: custom_callbacks.val_callbacks.RecordCallback
+      params:
+        epoch_freq: 50
+    test_recoder:
+      target: custom_callbacks.test_callbacks.RecordCallback
+      params:
+        epoch_freq: 1
+        method_name: MSLPT_dim32_tk256_bs64
+        dataset_name: QB
+    learning_rate_logger:
+      target: pytorch_lightning.callbacks.LearningRateMonitor
+      params:
+        logging_interval: epoch
+    stop_qv_callback:
+      target: custom_callbacks.mslpt_callbacks.Mlspt
+      params:
+        a: 10
+logger:
+  logdir: ./logs
+  wandb:
+    project: pansharpening
+    save_dir: ./logs/wandb
+    offline: false

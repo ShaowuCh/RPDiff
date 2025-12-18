@@ -1,0 +1,63 @@
+data:
+  target: utils.data_loader.DataModuleFromConfig
+  name: WV2
+  params:
+    batch_size: 4
+    num_workers: 4
+    collect_type: 0 # 0:default; 1 mix collect function
+    train:
+      WV2:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_WV2\train
+          data_root_linux: ../../dataSet/NBU_WV2/train
+          name: WV2
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: train
+          lr_size: 64
+          wave_lengths: [ [ 400, 450, 510, 585, 630, 705, 770, 860 ], [ 450, 510, 580, 625, 690, 745, 895, 1040 ] ]
+    validation:
+      WV2:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_linux: ../../dataSet/NBU_WV2/valid
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_WV2\valid
+          name: WV2
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [ 400, 450, 510, 585, 630, 705, 770, 860 ], [ 450, 510, 580, 625, 690, 745, 895, 1040 ] ]
+    test:
+      WV2:
+        target: data.pandata_pure.PanDataset
+        params:
+          data_root_win: ..\..\..\dataSet\NBU_WV2\test
+          data_root_linux: ../../dataSet/NBU_WV2/test
+          operate_sys: linux
+          name: WV2
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          #            REF_FR: 16
+          img_range: 2047
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [ 400, 450, 510, 585, 630, 705, 770, 860 ], [ 450, 510, 580, 625, 690, 745, 895, 1040 ] ]
+
+
+
+
+
+
+

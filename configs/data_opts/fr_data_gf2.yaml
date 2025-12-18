@@ -1,0 +1,32 @@
+data:
+  target: utils.data_loader.DataModuleFromConfig
+  name: GF2
+  params:
+    batch_size: 4
+    num_workers: 4
+    collect_type: 0 # 0:default; 1 mix collect function
+    test:
+      GF1:
+        target: data.pandata_pure_fr.PanDataset
+        params:
+          data_root_win: ..\..\..\dataSet\NBU_GF1\test
+          data_root_linux: ../../dataSet/GF2_raw/NBU_GF2/test
+          operate_sys: linux
+          name: GF2
+          scaledict:
+            LR: 1
+#            REF: 4
+            GT: 4
+            REF_FR: 16
+          img_range: 1023
+          clip: True
+          phase: val
+          lr_size: 256
+          wave_lengths: [ [450, 520,630,770 ], [ 520, 590,690,890 ] ]
+
+
+
+
+
+
+

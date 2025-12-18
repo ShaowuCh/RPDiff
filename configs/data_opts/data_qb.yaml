@@ -1,0 +1,63 @@
+data:
+  target: utils.data_loader.DataModuleFromConfig
+  name: QB
+  params:
+    batch_size: 4
+    num_workers: 4
+    collect_type: 0
+    train:
+      QB:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_QB\train
+          data_root_linux: ../../dataSet/NBU_QB/train
+          name: QB
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: train
+          lr_size: 64
+          wave_lengths: [ [ 445, 506, 632, 757 ], [ 516,595,698,853 ] ]
+    validation:
+      QB:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_linux: ../../dataSet/NBU_QB/valid
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_QB\valid
+          name: QB
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [ 445, 506, 632, 757 ], [ 516,595,698,853 ] ]
+    test:
+      QB:
+        target: data.pandata_pure.PanDataset
+        params:
+          data_root_win: ..\..\..\dataSet\NBU_QB\test
+          data_root_linux: ../../dataSet/NBU_QB/test
+          operate_sys: linux
+          name: QB
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          # REF_FR: 16
+          img_range: 2047
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [ 445, 506, 632, 757 ], [ 516,595,698,853 ] ]
+
+
+
+
+
+
+

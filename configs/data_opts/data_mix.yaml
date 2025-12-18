@@ -1,0 +1,94 @@
+data:
+  target: utils.data_loader.DataModuleFromConfig
+  name: MIX_WV2_QB_GF1
+  params:
+    batch_size: 2
+    num_workers: 4
+    collect_type: 1 # 0:default; 1 mix collect function
+    train:
+      WV2:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_WV2\train
+          data_root_linux: ../../dataSet/NBU_WV2/train
+          name: WV2
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: train
+          lr_size: 64
+          wave_lengths: [ [ 400, 450, 510, 585, 630, 705, 770, 860 ], [ 450, 510, 580, 625, 690, 745, 895, 1040 ] ]
+      QB:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_QB\train
+          data_root_linux: ../../dataSet/NBU_QB/train
+          name: QB
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 2047
+          phase: train
+          lr_size: 64
+          wave_lengths: [ [ 445, 506, 632, 757 ], [ 516,595,698,853 ] ]
+      GF1:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_win: D:\BaiduNetdiskDownload\PanDataSet\NBU_GF1\train
+          data_root_linux: ../../dataSet/NBU_GF1/train
+          name: GF1
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 1023
+          phase: train
+          lr_size: 64
+          wave_lengths: [ [450, 520,630,770 ], [ 520, 590,690,890 ] ]
+
+    validation:
+      GF1:
+        target: data.pandata_pure.PanDataset
+        params:
+          operate_sys: linux
+          data_root_linux: ../../dataSet/NBU_GF1/valid
+          data_root_win: ..\..\..\dataSet\NBU_GF1\valid
+          name: GF1
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          img_range: 1023
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [450, 520,630,770 ], [ 520, 590,690,890 ] ]
+    test:
+      GF1:
+        target: data.pandata_pure.PanDataset
+        params:
+          data_root_win: ..\..\..\dataSet\NBU_GF1\test
+          data_root_linux: ../../dataSet/NBU_GF1/test
+          operate_sys: linux
+          name: GF1
+          scaledict:
+            LR: 1
+            REF: 4
+            GT: 4
+          # REF_FR: 16
+          img_range: 1023
+          phase: val
+          lr_size: 64
+          wave_lengths: [ [450, 520,630,770 ], [ 520, 590,690,890 ] ]
+
+
+
+
+
+
+
