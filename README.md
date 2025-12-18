@@ -7,13 +7,7 @@ RESOLUTION-PROGRESSIVE DIFFUSION MODEL FOR PANSHARPENING
 
 ## Visualizations of intermediate steps with different d
 
-![](image/white_bg_step_1.png)
-
-![](image/white_bg_step_4.png)
-
 ![](image/white_bg_step_8.png)
-
-![](image/white_bg_step_16.png)
 
 ![](image/white_bg_step_32.png)
 
